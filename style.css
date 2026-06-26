@@ -1,0 +1,228 @@
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+.form-container {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+.container h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: #333;
+    text-align: center;
+}
+
+.result-container {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 900px; /* Tăng width để giống ảnh mẫu */
+    margin: auto;
+}
+
+.result-container h2 {
+    color: #2e7d32;
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2e7d32;
+    padding-bottom: 8px;
+}
+
+.result-container h3 {
+    color: #2e7d32;
+    font-size: 1.1rem;
+    margin-top: 28px;
+    margin-bottom: 12px;
+}
+
+/* Các thành phần Form */
+.form-group {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+input[type="number"], input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+input:focus, select:focus {
+    border-color: #0066cc;
+    outline: none;
+}
+
+.switch-group {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    background: #f0f0f0;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.switch-group label {
+    margin: 0;
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+    font-size: 0.9rem;
+}
+
+.switch-group input[type="radio"] {
+    display: none;
+}
+
+.switch-group input[type="radio"]:checked + label {
+    background: #0066cc;
+    color: white;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0052a3;
+}
+
+.btn-back {
+    background-color: #555;
+    margin-top: 24px;
+    max-width: 200px;
+    display: block;
+}
+
+.btn-back:hover {
+    background-color: #333;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Các bảng hiển thị kết quả */
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.summary-table th {
+    background-color: #f5f5f5;
+    color: #555;
+    font-weight: 600;
+    padding: 14px;
+    font-size: 0.95rem;
+    border: 1px solid #e0e0e0;
+}
+
+.summary-table td {
+    padding: 16px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: 1px solid #e0e0e0;
+}
+
+.details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.details-table td {
+    padding: 12px 14px;
+    font-size: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.details-table td:last-child {
+    text-align: right;
+    font-weight: 500;
+}
+
+.details-table .highlight-row {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.details-table .highlight-row td:last-child {
+    font-weight: bold;
+}
+
+.tax-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.tax-table th {
+    background-color: #f5f5f5;
+    color: #555;
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tax-table th:last-child, .tax-table td:last-child {
+    text-align: right;
+}
+
+.tax-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.negative {
+    color: #c62828;
+}
+
+.sub-text {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: normal;
+    display: block;
+    margin-top: 4px;
+}

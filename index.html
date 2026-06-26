@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhập Dữ Liệu Lương</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="form-container" id="formContainer">
+    <h2>Thông Tin Lương & Thuế</h2>
+    <form id="salaryForm">
+
+      <div class="form-group">
+        <label>Mức lương</label>
+        <input type="text" id="salary" placeholder="VD: 20.000.000 VND">
+      </div>
+
+      <div class="switch-group">
+        <input type="radio" id="isGross" name="salaryType" value="gross" checked>
+        <label for="isGross">Gross</label>
+        <input type="radio" id="isNet" name="salaryType" value="net">
+        <label for="isNet">Net</label>
+      </div>
+
+      <div id="insuranceSuperGroup">
+        <div class="form-group" id="insuranceGroup" style="display: none;">
+          <label for="insuranceSalary">Lương đóng BHXH</label>
+          <input type="text" id="insuranceSalary" placeholder="VD: 10.000.000 VND">
+        </div>
+        <div id="insuranceSwitchGroup" class="form-group">
+          <label>Phương thức đóng BHXH</label>
+          <div class="switch-group">
+            <input type="radio" id="insuranceFull" name="insuranceType" value="full" checked>
+            <label for="insuranceFull">Trên lương chính thức</label>
+            <input type="radio" id="insuranceManual" name="insuranceType" value="manual">
+            <label for="insuranceManual">Mức khác</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dependents">Số người phụ thuộc</label>
+        <input type="number" id="dependents" min="0" value="0">
+      </div>
+
+      <div class="form-group">
+        <label for="basicSalary">Lương cơ sở (Tính mức trần BHXH)</label>
+        <input type="text" id="basicSalary" placeholder="VD: 2.000.000 VND" value="2530000">
+      </div>
+
+      <div class="form-group">
+        <label for="region">Vùng (Tính lương tối thiểu vùng)</label>
+        <select id="region" required>
+          <option value="0">Vùng I</option>
+          <option value="1">Vùng II</option>
+          <option value="2">Vùng III</option>
+          <option value="3">Vùng IV</option>
+        </select>
+      </div>
+
+      <button id="submitButton">Xác nhận thông tin</button>
+    </form>
+  </div>
+
+  <div class="result-container" id="resultContainer" style="display: none;">
+    <h2>Kết quả</h2>
+
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>Lương Gross</th>
+          <th>Bảo hiểm</th>
+          <th>Thuế TNCN</th>
+          <th>Lương Net</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="res-gross">50,305,556</td>
+          <td class="negative" id="res-insurance">- 1,050,000</td>
+          <td class="negative" id="res-tax">- 2,255,556</td>
+          <td style="color: #2e7d32; font-weight: bold;" id="res-net">47,000,000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Diễn giải chi tiết (VNĐ)</h3>
+    <table class="details-table">
+      <tr class="highlight-row">
+        <td>Lương GROSS</td>
+        <td id="detail-gross">50,305,556</td>
+      </tr>
+      <tr>
+        <td>Bảo hiểm xã hội (8%)</td>
+        <td class="negative" id="detail-bhxh">- 800,000</td>
+      </tr>
+      <tr>
+        <td>Bảo hiểm y tế (1.5%)</td>
+        <td class="negative" id="detail-bhyt">- 150,000</td>
+      </tr>
+      <tr>
+        <td>Bảo hiểm thất nghiệp (1%)</td>
+        <td class="negative" id="detail-bhtn">- 100,000</td>
+      </tr>
+      <tr class="highlight-row">
+        <td>Thu nhập trước thuế</td>
+        <td id="detail-tntt">49,255,556</td>
+      </tr>
+      <tr>
+        <td>Giảm trừ gia cảnh bản thân</td>
+        <td class="negative" id="detail-gt-banthan">- 11,000,000</td>
+      </tr>
+      <tr>
+        <td>Giảm trừ gia cảnh người phụ thuộc</td>
+        <td class="negative" id="detail-gt-npt">- 4,400,000</td>
+      </tr>
+      <tr class="highlight-row">
+        <td>Thu nhập chịu thuế</td>
+        <td id="detail-tnct">27,555,556</td>
+      </tr>
+      <tr>
+        <td>Thuế thu nhập cá nhân(*)</td>
+        <td class="negative" id="detail-tax">- 2,255,556</td>
+      </tr>
+      <tr class="highlight-row" style="background-color: #eaedd5;">
+        <td>
+          Lương NET
+          <span class="sub-text">(Thu nhập trước thuế - Thuế thu nhập cá nhân)</span>
+        </td>
+        <td style="color: #2e7d32; font-size: 1.1rem;" id="detail-net">47,000,000</td>
+      </tr>
+    </table>
+
+    <!-- <h3>(*) Chi tiết thuế thu nhập cá nhân (VNĐ)</h3>
+    <table class="tax-table">
+      <thead>
+        <tr>
+          <th>Mức chịu thuế</th>
+          <th>Thuế suất</th>
+          <th>Lương chịu thuế</th>
+          <th>Tiền nộp</th>
+        </tr>
+      </thead>
+      <tbody id="tax-details-body">
+        <tr>
+          <td>Đến 5 triệu VNĐ</td>
+          <td>5%</td>
+          <td>5,000,000</td>
+          <td>250,000</td>
+        </tr>
+      </tbody>
+    </table> -->
+
+    <h3>Người sử dụng lao động trả (VNĐ)</h3>
+    <table class="details-table">
+      <tr class="highlight-row">
+        <td>Lương GROSS</td>
+        <td id="employer-gross">50,305,556</td>
+      </tr>
+      <tr>
+        <td>Bảo hiểm xã hội (17%)</td>
+        <td id="employer-bhxh">1,750,000</td>
+      </tr>
+      <tr>
+        <td>Bảo hiểm tai nạn (17%)</td>
+        <td id="employer-bhtnld">1,750,000</td>
+      </tr>
+      <tr>
+        <td>Bảo hiểm y tế (3%)</td>
+        <td id="employer-bhyt">300,000</td>
+      </tr>
+      <tr>
+        <td>Bảo hiểm thất nghiệp (1%)</td>
+        <td id="employer-bhtn">100,000</td>
+      </tr>
+      <tr class="highlight-row" style="background-color: #f0f0f0;">
+        <td>Tổng cộng</td>
+        <td id="employer-total">52,455,556</td>
+      </tr>
+    </table>
+
+    <button type="button" class="btn-back" id="backButton">Nhập lại thông tin</button>
+  </div>
+</body>
+<script src="dist/index.global.js"></script>
+
+</html>
