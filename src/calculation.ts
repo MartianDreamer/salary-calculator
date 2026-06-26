@@ -42,21 +42,12 @@ export const grossSalaryToNetSalary = (
     0,
   );
   let personalIncomeTax = 0;
-  console.log(
-    `insuranceSalaryCapped: ${insuranceSalaryCapped}, unemploymentInsuranceSalaryCapped: ${unemploymentInsuranceSalaryCapped}, socialInsurance: ${socialInsurance}, healthInsurance: ${healthInsurance}, unemploymentInsurance: ${unemploymentInsurance}, taxableSalary: ${taxableSalary}`,
-  );
 
   for (const taxRange of TAX_RANGES) {
     if (taxableSalary > taxRange.end) {
       personalIncomeTax += (taxRange.end - taxRange.start) * taxRange.value;
-      console.log(
-        `Taxable Salary ${taxableSalary} exceeds range ${taxRange.start} - ${taxRange.end}, adding tax: ${(taxRange.end - taxRange.start) * taxRange.value}`,
-      );
     } else {
       personalIncomeTax += (taxableSalary - taxRange.start) * taxRange.value;
-      console.log(
-        `Taxable Salary ${taxableSalary} falls within range ${taxRange.start} - ${taxRange.end}, adding tax: ${(taxableSalary - taxRange.start) * taxRange.value}`,
-      );
       break;
     }
   }
@@ -106,9 +97,6 @@ export const netSalaryToGrossSalary = (
     const currentResult = grossSalaryToNetSalary(testData);
 
     bestResult = currentResult;
-    console.log(
-      `Iteration ${i + 1}, Mid Gross: ${midGross}, Net Salary: ${currentResult.netSalary}`,
-    );
 
     const diff = currentResult.netSalary - targetNet;
 
