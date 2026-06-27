@@ -13,7 +13,7 @@ export class OpenStartRange<T> {
   }
 
   toString(): string {
-    return `(${this._start}, ${this._end}]`;
+    return `${this._start}-${this._end}-${this._value}`;
   }
 
   get start(): number {

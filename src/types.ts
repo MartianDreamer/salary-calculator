@@ -2,7 +2,6 @@ export interface SalaryData {
   salary: number;
   insuranceSalary: number;
   dependents: number;
-  basicSalary: number;
   region: number;
   fullInsurance: boolean;
 }

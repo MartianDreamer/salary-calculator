@@ -1,28 +1,29 @@
-import {
-  GIAM_TRU_GIA_CANH,
-  GIAM_TRU_GIA_CANH_NGUOI_PHU_THUOC,
-  MINIMUM_SALARY,
-  TAX_RANGES,
-} from "./const";
+import { options } from "./options";
 import { SalaryCalculationResult, SalaryData } from "./types";
 
 export const grossSalaryToNetSalary = (
   salaryData: SalaryData,
 ): SalaryCalculationResult => {
   const {
+    baseSalary,
+    minimumSalary,
+    taxRanges,
+    personalDeduction,
+    dependentDeduction,
+  } = options;
+  const {
     salary: grossSalary,
     insuranceSalary,
     dependents,
-    basicSalary,
     fullInsurance,
   } = salaryData;
   const insuranceSalaryCapped = Math.min(
     fullInsurance ? grossSalary : insuranceSalary,
-    basicSalary * 20,
+    baseSalary* 20,
   );
   const unemploymentInsuranceSalaryCapped = Math.min(
     fullInsurance ? grossSalary : insuranceSalary,
-    MINIMUM_SALARY[salaryData.region] * 20,
+    minimumSalary[salaryData.region] * 20,
   );
   const socialInsurance = insuranceSalaryCapped * 0.08;
   const healthInsurance = insuranceSalaryCapped * 0.015;
@@ -37,13 +38,13 @@ export const grossSalaryToNetSalary = (
       socialInsurance -
       healthInsurance -
       unemploymentInsurance -
-      GIAM_TRU_GIA_CANH -
-      dependents * GIAM_TRU_GIA_CANH_NGUOI_PHU_THUOC,
+      personalDeduction -
+      dependents * dependentDeduction,
     0,
   );
   let personalIncomeTax = 0;
 
-  for (const taxRange of TAX_RANGES) {
+  for (const taxRange of taxRanges) {
     if (taxableSalary > taxRange.end) {
       personalIncomeTax += (taxRange.end - taxRange.start) * taxRange.value;
     } else {

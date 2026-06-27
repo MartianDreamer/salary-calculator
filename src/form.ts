@@ -15,13 +15,7 @@ const isManualElement = document.getElementById(
 const dependentsElement = document.getElementById(
   "dependents",
 ) as HTMLInputElement;
-const basicSalaryElement = document.getElementById(
-  "basicSalary",
-) as HTMLInputElement;
 const regionElement = document.getElementById("region") as HTMLSelectElement;
-const insuranceSuperGroupElement = document.getElementById(
-  "insuranceSuperGroup",
-)!;
 const insuranceGroupElement = document.getElementById("insuranceGroup")!;
 const submitButton = document.getElementById("submitButton")!;
 const formContainer = document.getElementById("formContainer") as HTMLDivElement;
@@ -31,12 +25,10 @@ const collectSalaryData = (): SalaryData => {
   const salary = parseInt(salaryElement.value.replace(/\./g, ""));
   const insuranceSalary = parseInt(insuranceSalaryElement.value.replace(/\./g, ""));
   const dependents = parseInt(dependentsElement.value);
-  const basicSalary = parseInt(basicSalaryElement.value.replace(/\./g, ""));
   const region = parseInt(regionElement.value);
   return {
     salary,
     dependents,
-    basicSalary,
     region,
     insuranceSalary: insuranceSalary,
     fullInsurance: isFullElement.checked,

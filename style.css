@@ -1,248 +1,488 @@
 body {
-    font-family: system-ui, -apple-system, sans-serif;
-    background-color: #f4f4f9;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
-    box-sizing: border-box;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background-color: #f4f4f9;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .form-container {
-    background: #ffffff;
-    padding: 24px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 400px;
-    margin: auto;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
 }
 
 .container h2 {
-    margin-top: 0;
-    font-size: 1.25rem;
-    color: #333;
-    text-align: center;
+  margin-top: 0;
+  font-size: 1.25rem;
+  color: #333;
+  text-align: center;
 }
 
 .result-container {
-    background: #ffffff;
-    padding: 32px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    width: 100%;
-    max-width: 900px; /* Tăng width để giống ảnh mẫu */
-    margin: auto;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 900px; /* Tăng width để giống ảnh mẫu */
+  margin: auto;
 }
 
 .result-container h2 {
-    color: #2e7d32;
-    font-size: 1.4rem;
-    margin-top: 0;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #2e7d32;
-    padding-bottom: 8px;
+  color: #2e7d32;
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #2e7d32;
+  padding-bottom: 8px;
 }
 
 .result-container h3 {
-    color: #2e7d32;
-    font-size: 1.1rem;
-    margin-top: 28px;
-    margin-bottom: 12px;
+  color: #2e7d32;
+  font-size: 1.1rem;
+  margin-top: 28px;
+  margin-bottom: 12px;
 }
 
 /* Các thành phần Form */
 .form-group {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: #555;
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #555;
 }
 
-input[type="number"], input[type="text"], select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 1rem;
-    background-color: #fff;
+input[type="number"],
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  background-color: #fff;
 }
 
-input:focus, select:focus {
-    border-color: #0066cc;
-    outline: none;
+input:focus,
+select:focus {
+  border-color: #0066cc;
+  outline: none;
 }
 
 .switch-group {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 16px;
-    background: #f0f0f0;
-    padding: 4px;
-    border-radius: 4px;
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 4px;
 }
 
 .switch-group label {
-    margin: 0;
-    flex: 1;
-    text-align: center;
-    padding: 8px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background 0.2s, color 0.2s;
-    font-size: 0.9rem;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+  font-size: 0.9rem;
 }
 
 .switch-group input[type="radio"] {
-    display: none;
+  display: none;
 }
 
 .switch-group input[type="radio"]:checked + label {
-    background: #0066cc;
-    color: white;
+  background: #0066cc;
+  color: white;
 }
 
 button {
-    width: 100%;
-    padding: 12px;
-    background-color: #0066cc;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 button:hover {
-    background-color: #0052a3;
+  background-color: #0052a3;
 }
 
 .btn-back {
-    background-color: #555;
-    margin-top: 24px;
-    max-width: 200px;
-    display: block;
+  background-color: #555;
+  margin-top: 24px;
+  max-width: 200px;
+  display: block;
 }
 
 .btn-back:hover {
-    background-color: #333;
+  background-color: #333;
 }
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 /* Các bảng hiển thị kết quả */
 .summary-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 24px;
-    text-align: center;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  text-align: center;
 }
 
 .summary-table th {
-    background-color: #f5f5f5;
-    color: #555;
-    font-weight: 600;
-    padding: 14px;
-    font-size: 0.95rem;
-    border: 1px solid #e0e0e0;
+  background-color: #f5f5f5;
+  color: #555;
+  font-weight: 600;
+  padding: 14px;
+  font-size: 0.95rem;
+  border: 1px solid #e0e0e0;
 }
 
 .summary-table td {
-    padding: 16px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    border: 1px solid #e0e0e0;
+  padding: 16px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border: 1px solid #e0e0e0;
 }
 
 .details-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
 .details-table td {
-    padding: 12px 14px;
-    font-size: 1rem;
-    border-bottom: 1px solid #eee;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border-bottom: 1px solid #eee;
 }
 
 .details-table td:last-child {
-    text-align: right;
-    font-weight: 500;
+  text-align: right;
+  font-weight: 500;
 }
 
 .details-table .highlight-row {
-    background-color: #f5f5f5;
-    font-weight: bold;
+  background-color: #f5f5f5;
+  font-weight: bold;
 }
 
 .details-table .highlight-row td:last-child {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .tax-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.95rem;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
 }
 
 .tax-table th {
-    background-color: #f5f5f5;
-    color: #555;
-    text-align: left;
-    padding: 12px;
-    border-bottom: 2px solid #e0e0e0;
+  background-color: #f5f5f5;
+  color: #555;
+  text-align: left;
+  padding: 12px;
+  border-bottom: 2px solid #e0e0e0;
 }
 
-.tax-table th:last-child, .tax-table td:last-child {
-    text-align: right;
+.tax-table th:last-child,
+.tax-table td:last-child {
+  text-align: right;
 }
 
 .tax-table td {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
 }
 
 .negative {
-    color: #c62828;
+  color: #c62828;
 }
 
 .sub-text {
-    font-size: 0.85rem;
-    color: #666;
-    font-weight: normal;
-    display: block;
-    margin-top: 4px;
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: normal;
+  display: block;
+  margin-top: 4px;
 }
 
 footer {
-    width: 100%;
-    text-align: center;
-    padding: 16px 20px;
-    box-sizing: border-box;
-    color: #666;
-    font-size: 0.95rem;
-    margin-top: auto;
-    background-color: #ffffff;
-    box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+  width: 100%;
+  text-align: center;
+  padding: 16px 20px;
+  box-sizing: border-box;
+  color: #666;
+  font-size: 0.95rem;
+  margin-top: auto;
+  background-color: #ffffff;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+}
+
+header {
+  width: 100%;
+  text-align: center;
+  padding: 16px 20px;
+  box-sizing: border-box;
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: auto;
+  background-color: #ffffff;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
 }
 
 footer a {
-    color: #0066cc;
-    text-decoration: none;
-    font-weight: 500;
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 500;
 }
 
 footer a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
+}
+
+.tabs-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 16px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #666;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  margin: 0;
+  width: auto;
+}
+
+.tab-btn:hover {
+  background-color: transparent;
+  color: #0066cc;
+}
+
+.tab-btn.active {
+  color: #0066cc;
+  border-bottom: 3px solid #0066cc;
+}
+
+.settings-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+.settings-table th {
+  text-align: left;
+  font-size: 0.9rem;
+  color: #555;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.settings-table td {
+  padding: 8px 4px;
+}
+
+.settings-table input[type="number"] {
+  padding: 8px;
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+.btn-icon {
+  background: #ffebee;
+  color: #c62828;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+
+.btn-icon:hover {
+  background: #ffcdd2;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.settings-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    width: 100%;
+    max-width: 1000px; /* Tận dụng không gian theo chiều ngang */
+    margin: 0 auto;
+}
+
+.settings-card {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-card h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #333;
+    border-bottom: 2px solid #0066cc;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.settings-grid .form-group {
+    margin-bottom: 0; /* Xóa margin dưới vì grid gap đã lo khoảng cách */
+}
+
+.settings-grid .full-width {
+    grid-column: 1 / -1;
+}
+
+.settings-actions {
+    margin-top: auto; /* Đẩy nút Lưu xuống dưới cùng của thẻ */
+    padding-top: 24px;
+}
+
+@media (max-width: 768px) {
+    .settings-layout {
+        grid-template-columns: 1fr;
+    }
+}
+.settings-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.btn-secondary {
+    flex: 1; /* Thay đổi từ 2 thành 1 */
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-secondary:hover {
+    background-color: #d0d0d0;
+}
+
+.btn-delete {
+    flex: 1; /* Cả hai nút giờ đây có chiều rộng bằng nhau */
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-delete:hover {
+    background-color: #ffcdd2;
+    border-color: #ef9a9a;
+}
+
+.tax-table-display {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tax-row {
+    transition: background-color 0.2s ease;
+}
+
+.tax-row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tax-row:hover {
+    background-color: #f1f7ff;
+}
+
+.tax-table-display td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #444;
+}
+
+.tax-table-display th {
+    background-color: #f0f4f8;
+    color: #333;
+    padding: 12px;
+    text-align: center;
+    border-bottom: 2px solid #d1d9e6;
+}
+
+/* Đảm bảo tất cả input trong bảng có kích thước đồng nhất */
+.settings-table input[type="text"], 
+.settings-table input[type="number"] {
+    width: 100%;             /* Chiếm hết bề ngang của ô td */
+    padding: 8px 10px;       /* Padding đồng nhất */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;  /* RẤT QUAN TRỌNG: tính cả padding vào width */
+    font-size: 0.95rem;
+    font-family: inherit;    /* Dùng font chữ của bảng */
+}
+
+/* Đảm bảo td chứa input không bị co lại quá mức */
+.settings-table td {
+    padding: 8px;
 }

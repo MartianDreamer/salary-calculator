@@ -16,6 +16,7 @@ export const MINIMUM_SALARY_I = 5_310_000;
 export const MINIMUM_SALARY_II = 4_730_000;
 export const MINIMUM_SALARY_III = 4_140_000;
 export const MINIMUM_SALARY_IV = 3_700_000;
+export const BASE_SALARY= 2_530_000;
 export const MINIMUM_SALARY = [
   MINIMUM_SALARY_I,
   MINIMUM_SALARY_II,

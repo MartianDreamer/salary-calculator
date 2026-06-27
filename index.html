@@ -9,133 +9,133 @@
 </head>
 
 <body>
+  <header class="tabs-container">
+    <button class="tab-btn active" id="tab-main">Tính Lương</button>
+    <button class="tab-btn" id="tab-options">Tùy chỉnh</button>
+  </header>
 
-  <div class="form-container" id="formContainer">
-    <h2>Thông Tin Lương & Thuế</h2>
-    <form id="salaryForm">
+  <main class="main-content" id="main-tab">
+    <div class="form-container" id="formContainer">
+      <h2>Thông Tin Lương & Thuế</h2>
+      <form id="salaryForm">
 
-      <div class="form-group">
-        <label>Mức lương</label>
-        <input type="text" id="salary" placeholder="VD: 20.000.000 VND">
-      </div>
-
-      <div class="switch-group">
-        <input type="radio" id="isGross" name="salaryType" value="gross" checked>
-        <label for="isGross">Gross</label>
-        <input type="radio" id="isNet" name="salaryType" value="net">
-        <label for="isNet">Net</label>
-      </div>
-
-      <div id="insuranceSuperGroup">
-        <div class="form-group" id="insuranceGroup" style="display: none;">
-          <label for="insuranceSalary">Lương đóng BHXH</label>
-          <input type="text" id="insuranceSalary" placeholder="VD: 10.000.000 VND">
+        <div class="form-group">
+          <label>Mức lương</label>
+          <input type="text" id="salary" placeholder="VD: 20.000.000 VND">
         </div>
-        <div id="insuranceSwitchGroup" class="form-group">
-          <label>Phương thức đóng BHXH</label>
-          <div class="switch-group">
-            <input type="radio" id="insuranceFull" name="insuranceType" value="full" checked>
-            <label for="insuranceFull">Trên lương chính thức</label>
-            <input type="radio" id="insuranceManual" name="insuranceType" value="manual">
-            <label for="insuranceManual">Mức khác</label>
+
+        <div class="switch-group">
+          <input type="radio" id="isGross" name="salaryType" value="gross" checked>
+          <label for="isGross">Gross</label>
+          <input type="radio" id="isNet" name="salaryType" value="net">
+          <label for="isNet">Net</label>
+        </div>
+
+        <div id="insuranceSuperGroup">
+          <div class="form-group" id="insuranceGroup" style="display: none;">
+            <label for="insuranceSalary">Lương đóng BHXH</label>
+            <input type="text" id="insuranceSalary" placeholder="VD: 10.000.000 VND">
+          </div>
+          <div id="insuranceSwitchGroup" class="form-group">
+            <label>Phương thức đóng BHXH</label>
+            <div class="switch-group">
+              <input type="radio" id="insuranceFull" name="insuranceType" value="full" checked>
+              <label for="insuranceFull">Trên lương chính thức</label>
+              <input type="radio" id="insuranceManual" name="insuranceType" value="manual">
+              <label for="insuranceManual">Mức khác</label>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label for="dependents">Số người phụ thuộc</label>
-        <input type="number" id="dependents" min="0" value="0">
-      </div>
+        <div class="form-group">
+          <label for="dependents">Số người phụ thuộc</label>
+          <input type="number" id="dependents" min="0" value="0">
+        </div>
 
-      <div class="form-group">
-        <label for="basicSalary">Lương cơ sở (Tính mức trần BHXH)</label>
-        <input type="text" id="basicSalary" placeholder="VD: 2.000.000 VND" value="2530000">
-      </div>
+        <div class="form-group">
+          <label for="region">Vùng (Tính lương tối thiểu vùng)</label>
+          <select id="region" required>
+            <option value="0">Vùng I</option>
+            <option value="1">Vùng II</option>
+            <option value="2">Vùng III</option>
+            <option value="3">Vùng IV</option>
+          </select>
+        </div>
 
-      <div class="form-group">
-        <label for="region">Vùng (Tính lương tối thiểu vùng)</label>
-        <select id="region" required>
-          <option value="0">Vùng I</option>
-          <option value="1">Vùng II</option>
-          <option value="2">Vùng III</option>
-          <option value="3">Vùng IV</option>
-        </select>
-      </div>
+        <button id="submitButton">Xác nhận thông tin</button>
+      </form>
+    </div>
 
-      <button id="submitButton">Xác nhận thông tin</button>
-    </form>
-  </div>
+    <div class="result-container" id="resultContainer" style="display: none;">
+      <h2>Kết quả</h2>
 
-  <div class="result-container" id="resultContainer" style="display: none;">
-    <h2>Kết quả</h2>
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>Lương Gross</th>
+            <th>Bảo hiểm</th>
+            <th>Thuế TNCN</th>
+            <th>Lương Net</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="res-gross">50,305,556</td>
+            <td class="negative" id="res-insurance">- 1,050,000</td>
+            <td class="negative" id="res-tax">- 2,255,556</td>
+            <td style="color: #2e7d32; font-weight: bold;" id="res-net">47,000,000</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <table class="summary-table">
-      <thead>
-        <tr>
-          <th>Lương Gross</th>
-          <th>Bảo hiểm</th>
-          <th>Thuế TNCN</th>
-          <th>Lương Net</th>
+      <h3>Diễn giải chi tiết (VNĐ)</h3>
+      <table class="details-table">
+        <tr class="highlight-row">
+          <td>Lương GROSS</td>
+          <td id="detail-gross">50,305,556</td>
         </tr>
-      </thead>
-      <tbody>
         <tr>
-          <td id="res-gross">50,305,556</td>
-          <td class="negative" id="res-insurance">- 1,050,000</td>
-          <td class="negative" id="res-tax">- 2,255,556</td>
-          <td style="color: #2e7d32; font-weight: bold;" id="res-net">47,000,000</td>
+          <td>Bảo hiểm xã hội (8%)</td>
+          <td class="negative" id="detail-bhxh">- 800,000</td>
         </tr>
-      </tbody>
-    </table>
+        <tr>
+          <td>Bảo hiểm y tế (1.5%)</td>
+          <td class="negative" id="detail-bhyt">- 150,000</td>
+        </tr>
+        <tr>
+          <td>Bảo hiểm thất nghiệp (1%)</td>
+          <td class="negative" id="detail-bhtn">- 100,000</td>
+        </tr>
+        <tr class="highlight-row">
+          <td>Thu nhập trước thuế</td>
+          <td id="detail-tntt">49,255,556</td>
+        </tr>
+        <tr>
+          <td>Giảm trừ gia cảnh bản thân</td>
+          <td class="negative" id="detail-gt-banthan">- 11,000,000</td>
+        </tr>
+        <tr>
+          <td>Giảm trừ gia cảnh người phụ thuộc</td>
+          <td class="negative" id="detail-gt-npt">- 4,400,000</td>
+        </tr>
+        <tr class="highlight-row">
+          <td>Thu nhập chịu thuế</td>
+          <td id="detail-tnct">27,555,556</td>
+        </tr>
+        <tr>
+          <td>Thuế thu nhập cá nhân(*)</td>
+          <td class="negative" id="detail-tax">- 2,255,556</td>
+        </tr>
+        <tr class="highlight-row" style="background-color: #eaedd5;">
+          <td>
+            Lương NET
+            <span class="sub-text">(Thu nhập trước thuế - Thuế thu nhập cá nhân)</span>
+          </td>
+          <td style="color: #2e7d32; font-size: 1.1rem;" id="detail-net">47,000,000</td>
+        </tr>
+      </table>
 
-    <h3>Diễn giải chi tiết (VNĐ)</h3>
-    <table class="details-table">
-      <tr class="highlight-row">
-        <td>Lương GROSS</td>
-        <td id="detail-gross">50,305,556</td>
-      </tr>
-      <tr>
-        <td>Bảo hiểm xã hội (8%)</td>
-        <td class="negative" id="detail-bhxh">- 800,000</td>
-      </tr>
-      <tr>
-        <td>Bảo hiểm y tế (1.5%)</td>
-        <td class="negative" id="detail-bhyt">- 150,000</td>
-      </tr>
-      <tr>
-        <td>Bảo hiểm thất nghiệp (1%)</td>
-        <td class="negative" id="detail-bhtn">- 100,000</td>
-      </tr>
-      <tr class="highlight-row">
-        <td>Thu nhập trước thuế</td>
-        <td id="detail-tntt">49,255,556</td>
-      </tr>
-      <tr>
-        <td>Giảm trừ gia cảnh bản thân</td>
-        <td class="negative" id="detail-gt-banthan">- 11,000,000</td>
-      </tr>
-      <tr>
-        <td>Giảm trừ gia cảnh người phụ thuộc</td>
-        <td class="negative" id="detail-gt-npt">- 4,400,000</td>
-      </tr>
-      <tr class="highlight-row">
-        <td>Thu nhập chịu thuế</td>
-        <td id="detail-tnct">27,555,556</td>
-      </tr>
-      <tr>
-        <td>Thuế thu nhập cá nhân(*)</td>
-        <td class="negative" id="detail-tax">- 2,255,556</td>
-      </tr>
-      <tr class="highlight-row" style="background-color: #eaedd5;">
-        <td>
-          Lương NET
-          <span class="sub-text">(Thu nhập trước thuế - Thuế thu nhập cá nhân)</span>
-        </td>
-        <td style="color: #2e7d32; font-size: 1.1rem;" id="detail-net">47,000,000</td>
-      </tr>
-    </table>
-
-    <!-- <h3>(*) Chi tiết thuế thu nhập cá nhân (VNĐ)</h3>
+      <!-- <h3>(*) Chi tiết thuế thu nhập cá nhân (VNĐ)</h3>
     <table class="tax-table">
       <thead>
         <tr>
@@ -155,36 +155,103 @@
       </tbody>
     </table> -->
 
-    <h3>Người sử dụng lao động trả (VNĐ)</h3>
-    <table class="details-table">
-      <tr class="highlight-row">
-        <td>Lương GROSS</td>
-        <td id="employer-gross">50,305,556</td>
-      </tr>
-      <tr>
-        <td>Bảo hiểm xã hội (17%)</td>
-        <td id="employer-bhxh">1,750,000</td>
-      </tr>
-      <tr>
-        <td>Bảo hiểm tai nạn (17%)</td>
-        <td id="employer-bhtnld">1,750,000</td>
-      </tr>
-      <tr>
-        <td>Bảo hiểm y tế (3%)</td>
-        <td id="employer-bhyt">300,000</td>
-      </tr>
-      <tr>
-        <td>Bảo hiểm thất nghiệp (1%)</td>
-        <td id="employer-bhtn">100,000</td>
-      </tr>
-      <tr class="highlight-row" style="background-color: #f0f0f0;">
-        <td>Tổng cộng</td>
-        <td id="employer-total">52,455,556</td>
-      </tr>
-    </table>
+      <h3>Người sử dụng lao động trả (VNĐ)</h3>
+      <table class="details-table">
+        <tr class="highlight-row">
+          <td>Lương GROSS</td>
+          <td id="employer-gross">50,305,556</td>
+        </tr>
+        <tr>
+          <td>Bảo hiểm xã hội (17%)</td>
+          <td id="employer-bhxh">1,750,000</td>
+        </tr>
+        <tr>
+          <td>Bảo hiểm tai nạn (17%)</td>
+          <td id="employer-bhtnld">1,750,000</td>
+        </tr>
+        <tr>
+          <td>Bảo hiểm y tế (3%)</td>
+          <td id="employer-bhyt">300,000</td>
+        </tr>
+        <tr>
+          <td>Bảo hiểm thất nghiệp (1%)</td>
+          <td id="employer-bhtn">100,000</td>
+        </tr>
+        <tr class="highlight-row" style="background-color: #f0f0f0;">
+          <td>Tổng cộng</td>
+          <td id="employer-total">52,455,556</td>
+        </tr>
+      </table>
 
-    <button type="button" class="btn-back" id="backButton">Nhập lại thông tin</button>
-  </div>
+      <button type="button" class="btn-back" id="backButton">Nhập lại thông tin</button>
+    </div>
+  </main>
+
+  <main class="main-content" id="option-tab" style="display: none;">
+    <div class="settings-layout">
+
+      <div class="settings-card">
+        <h2>Thông Số Cơ Bản</h2>
+        <div class="settings-grid">
+          <div class="form-group full-width">
+            <label for="opt-base-salary">Lương cơ sở</label>
+            <input type="text" id="opt-base-salary">
+          </div>
+          <div class="form-group">
+            <label for="opt-personal-deduction">Giảm trừ bản thân</label>
+            <input type="text" id="opt-personal-deduction">
+          </div>
+          <div class="form-group">
+            <label for="opt-dependent-deduction">Giảm trừ NPT</label>
+            <input type="text" id="opt-dependent-deduction">
+          </div>
+        </div>
+
+        <h2 style="margin-top: 24px;">Lương Tối Thiểu Vùng</h2>
+        <div class="settings-grid">
+          <div class="form-group">
+            <label for="opt-region-1">Vùng I</label>
+            <input type="text" id="opt-region-1">
+          </div>
+          <div class="form-group">
+            <label for="opt-region-2">Vùng II</label>
+            <input type="text" id="opt-region-2">
+          </div>
+          <div class="form-group">
+            <label for="opt-region-3">Vùng III</label>
+            <input type="text" id="opt-region-3">
+          </div>
+          <div class="form-group">
+            <label for="opt-region-4">Vùng IV</label>
+            <input type="text" id="opt-region-4">
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h2>Cấu hình Biểu thuế lũy tiến</h2>
+
+        <div class="table-wrapper">
+          <table class="settings-table" id="taxSettingsTable">
+            <thead>
+              <tr>
+                <th>Trần thuế (VNĐ)</th>
+                <th>Mức thuế (%)</th>
+              </tr>
+            </thead>
+            <tbody id="taxSettingsTableBody">
+            </tbody>
+          </table>
+          <button type="button" id="addNewButton" class="btn-secondary">+ Thêm bậc thuế</button>
+        </div>
+
+        <div class="settings-actions">
+          <button type="button" id="deleteAllButton" class="btn-delete">Xóa hết</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
   <footer>
     <p>Source code <a href="https://github.com/MartianDreamer/salary-calculator" target="_blank"
         rel="noopener noreferrer">GitHub</a></p>
