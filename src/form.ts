@@ -18,19 +18,25 @@ const dependentsElement = document.getElementById(
 const regionElement = document.getElementById("region") as HTMLSelectElement;
 const insuranceGroupElement = document.getElementById("insuranceGroup")!;
 const submitButton = document.getElementById("submitButton")!;
-const formContainer = document.getElementById("formContainer") as HTMLDivElement;
-const resultContainer = document.getElementById("resultContainer") as HTMLDivElement;
+const formContainer = document.getElementById(
+  "formContainer",
+) as HTMLDivElement;
+const resultContainer = document.getElementById(
+  "resultContainer",
+) as HTMLDivElement;
 
 const collectSalaryData = (): SalaryData => {
   const salary = parseInt(salaryElement.value.replace(/\./g, ""));
-  const insuranceSalary = parseInt(insuranceSalaryElement.value.replace(/\./g, ""));
+  const insuranceSalary = parseInt(
+    insuranceSalaryElement.value.replace(/\./g, ""),
+  );
   const dependents = parseInt(dependentsElement.value);
   const region = parseInt(regionElement.value);
   return {
-    salary,
+    salary: isNaN(salary) ? 0 : salary,
     dependents,
     region,
-    insuranceSalary: insuranceSalary,
+    insuranceSalary: isNaN(insuranceSalary) ? 0 : insuranceSalary,
     fullInsurance: isFullElement.checked,
   };
 };
@@ -41,6 +47,9 @@ export const handleFormSubmit = (
   submitButton.addEventListener("click", (e) => {
     e.preventDefault();
     const salaryData = collectSalaryData();
+    if (salaryData.salary === 0) {
+      return;
+    }
     const isGrossToNet = isGrossElement.checked;
     let result: SalaryCalculationResult;
     if (isGrossToNet) {
