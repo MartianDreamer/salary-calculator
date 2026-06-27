@@ -109,6 +109,7 @@ export const handleOptions = () => {
     e.preventDefault();
     options.taxRanges = [];
     loadTaxRangesToUI();
+    beingInserted = false;
   });
 
   addNewButton.addEventListener("click", (e) => {
