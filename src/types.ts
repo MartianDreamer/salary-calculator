@@ -19,3 +19,17 @@ export interface SalaryCalculationResult {
   employerHealthInsurance: number;
   employerUnemploymentInsurance: number;
 }
+
+export interface TaxRange {
+  start: number;
+  end: number;
+  rate: number;
+}
+
+export interface Option {
+  baseSalary: number;
+  minimumSalary: number[];
+  taxRanges: TaxRange[];
+  personalDeduction: number;
+  dependentDeduction: number;
+}

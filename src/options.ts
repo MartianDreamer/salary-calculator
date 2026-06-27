@@ -5,9 +5,11 @@ import {
   MINIMUM_SALARY,
   TAX_RANGES,
 } from "./const";
-import { OpenStartRange } from "./range";
+import { Option, TaxRange } from "./types";
 
-export const options = {
+const LOCAL_STORAGE_KEY = "salaryCalculatorOptions";
+
+export let options: Option = {
   baseSalary: BASE_SALARY,
   minimumSalary: MINIMUM_SALARY,
   taxRanges: TAX_RANGES,
@@ -45,8 +47,11 @@ const deleteAllButton = document.getElementById(
 const addNewButton = document.getElementById(
   "addNewButton",
 ) as HTMLButtonElement;
+const resetOptionButton = document.getElementById(
+  "resetOptionButton",
+) as HTMLButtonElement;
 
-const loadDefaultOptionsToUI = () => {
+const loadOptionsToUI = () => {
   optBaseSalaryElement.value = options.baseSalary.toLocaleString("vi-VN");
   optPersonalDeductionElement.value =
     options.personalDeduction.toLocaleString("vi-VN");
@@ -61,48 +66,63 @@ const loadDefaultOptionsToUI = () => {
 
 export const handleOptions = () => {
   let beingInserted = false;
-  loadDefaultOptionsToUI();
+  tryLoadFromLocalStorage();
+  loadOptionsToUI();
+
+  resetOptionButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    loadDefaultValue();
+    saveToLocalStorage();
+    loadOptionsToUI();
+  });
 
   optBaseSalaryElement.addEventListener("input", () => {
     options.baseSalary = parseInt(
       optBaseSalaryElement.value.replace(/\./g, ""),
     );
+    saveToLocalStorage();
   });
 
   optPersonalDeductionElement.addEventListener("input", () => {
     options.personalDeduction = parseInt(
       optPersonalDeductionElement.value.replace(/\./g, ""),
     );
+    saveToLocalStorage();
   });
 
   optDependentDeductionElement.addEventListener("input", () => {
     options.dependentDeduction = parseInt(
       optDependentDeductionElement.value.replace(/\./g, ""),
     );
+    saveToLocalStorage();
   });
 
   optRegion1Element.addEventListener("input", () => {
     options.minimumSalary[0] = parseInt(
       optRegion1Element.value.replace(/\./g, ""),
     );
+    saveToLocalStorage();
   });
 
   optRegion2Element.addEventListener("input", () => {
     options.minimumSalary[1] = parseInt(
       optRegion2Element.value.replace(/\./g, ""),
     );
+    saveToLocalStorage();
   });
 
   optRegion3Element.addEventListener("input", () => {
     options.minimumSalary[2] = parseInt(
       optRegion3Element.value.replace(/\./g, ""),
     );
+    saveToLocalStorage();
   });
 
   optRegion4Element.addEventListener("input", () => {
     options.minimumSalary[3] = parseInt(
       optRegion4Element.value.replace(/\./g, ""),
     );
+    saveToLocalStorage();
   });
 
   deleteAllButton.addEventListener("click", (e) => {
@@ -110,6 +130,7 @@ export const handleOptions = () => {
     options.taxRanges = [];
     loadTaxRangesToUI();
     beingInserted = false;
+    saveToLocalStorage();
   });
 
   addNewButton.addEventListener("click", (e) => {
@@ -175,12 +196,13 @@ export const handleOptions = () => {
       if (value === 0 || end < start) {
         return;
       }
-      const insertedTaxRange = new OpenStartRange(start, end, value);
-      options.taxRanges.push(insertedTaxRange);
+      const insertedTaxRange = { start, end, rate: value };
+      taxRanges.push(insertedTaxRange);
       insertRow.remove();
       confirmRow.remove();
       insertTaxRange(insertedTaxRange);
       beingInserted = false;
+      saveToLocalStorage();
     });
   });
 };
@@ -192,13 +214,47 @@ const loadTaxRangesToUI = () => {
   }
 };
 
-const insertTaxRange = (taxRange: OpenStartRange<number>) => {
+const insertTaxRange = (taxRange: TaxRange) => {
   taxSettingsTableBody.insertAdjacentHTML(
     "beforeend",
     `
       <tr id="row-${taxRange.toString()}" class="tax-row">
         <td><input disabled type="text" value="${taxRange.end.toLocaleString("vi-VN")}"></td>
-        <td><input disabled type="number" value="${taxRange.value}"></td>
+        <td><input disabled type="number" value="${taxRange.rate}"></td>
       </tr>`,
   );
+};
+
+const tryLoadFromLocalStorage = () => {
+  const optionsString = localStorage.getItem(LOCAL_STORAGE_KEY);
+  if (!optionsString) {
+    loadDefaultValue();
+    return;
+  }
+  options = {
+    ...JSON.parse(optionsString),
+  };
+  if (!options.taxRanges) {
+    options.taxRanges = [];
+  } else if (
+    options.taxRanges.length > 0 &&
+    !options.taxRanges[options.taxRanges.length - 1].end
+  ) {
+    options.taxRanges[options.taxRanges.length - 1].end =
+      Number.POSITIVE_INFINITY; 
+  }
+};
+
+const saveToLocalStorage = () => {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(options));
+};
+
+const loadDefaultValue = () => {
+  options = {
+    baseSalary: BASE_SALARY,
+    minimumSalary: MINIMUM_SALARY,
+    taxRanges: TAX_RANGES,
+    personalDeduction: GIAM_TRU_GIA_CANH,
+    dependentDeduction: GIAM_TRU_GIA_CANH_NGUOI_PHU_THUOC,
+  };
 };

@@ -19,7 +19,7 @@ export const grossSalaryToNetSalary = (
   } = salaryData;
   const insuranceSalaryCapped = Math.min(
     fullInsurance ? grossSalary : insuranceSalary,
-    baseSalary* 20,
+    baseSalary * 20,
   );
   const unemploymentInsuranceSalaryCapped = Math.min(
     fullInsurance ? grossSalary : insuranceSalary,
@@ -46,9 +46,9 @@ export const grossSalaryToNetSalary = (
 
   for (const taxRange of taxRanges) {
     if (taxableSalary > taxRange.end) {
-      personalIncomeTax += (taxRange.end - taxRange.start) * taxRange.value;
+      personalIncomeTax += (taxRange.end - taxRange.start) * taxRange.rate;
     } else {
-      personalIncomeTax += (taxableSalary - taxRange.start) * taxRange.value;
+      personalIncomeTax += (taxableSalary - taxRange.start) * taxRange.rate;
       break;
     }
   }
