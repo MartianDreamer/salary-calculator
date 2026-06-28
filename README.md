@@ -10,3 +10,9 @@ Các công cụ tính lương hiện tại thường gán cứng mức lương c
 * Tùy chỉnh mức lương cơ sở
 * Tùy chỉnh mức lương vùng
 * tùy chỉnh mức thuế
+
+## Hướng dẫn sử dụng
+
+[Link công cụ](https://martiandreamer.github.io/salary-calculator)
+
+Để thay đổi các bậc thuế cần xoá hết các bậc thuế và nhập lại từ đầu.
