@@ -141,8 +141,6 @@ export const handleOptions = () => {
     e.preventDefault();
     options.taxRanges = [];
     loadTaxRangesToUI();
-
-    beingInserted = false;
     saveToLocalStorage();
   });
 
@@ -174,8 +172,10 @@ export const handleOptions = () => {
     insertRow.classList.add("hidden");
     confirmRow.classList.add("hidden");
     insertTaxRange(insertedTaxRange);
-    beingInserted = false;
     saveToLocalStorage();
+    insertedEndElement.value = "";
+    insertedValueElement.value = "";
+    beingInserted = false;
   });
 
   addNewButton.addEventListener("click", (e) => {
@@ -190,8 +190,6 @@ export const handleOptions = () => {
     if (lastRange && lastRange.end === Number.POSITIVE_INFINITY) {
       return;
     }
-
-    console.log(lastRange);
 
     insertRow.classList.remove("hidden");
     confirmRow.classList.remove("hidden");
