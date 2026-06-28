@@ -50,6 +50,17 @@ const addNewButton = document.getElementById(
 const resetOptionButton = document.getElementById(
   "resetOptionButton",
 ) as HTMLButtonElement;
+const insertedEndElement = document.getElementById(
+  "insertedEnd",
+) as HTMLInputElement;
+const insertedValueElement = document.getElementById(
+  "insertedValue",
+) as HTMLInputElement;
+const insertConfirmElement = document.getElementById(
+  "insertConfirm",
+) as HTMLButtonElement;
+const insertRow = document.getElementById("insertRow")!;
+const confirmRow = document.getElementById("confirmRow")!;
 
 const loadOptionsToUI = () => {
   optBaseSalaryElement.value = options.baseSalary.toLocaleString("vi-VN");
@@ -66,6 +77,7 @@ const loadOptionsToUI = () => {
 
 export const handleOptions = () => {
   let beingInserted = false;
+
   tryLoadFromLocalStorage();
   loadOptionsToUI();
 
@@ -129,94 +141,77 @@ export const handleOptions = () => {
     e.preventDefault();
     options.taxRanges = [];
     loadTaxRangesToUI();
-    beingInserted = false;
     saveToLocalStorage();
+  });
+
+  insertedEndElement.addEventListener("input", () => {
+    if (isNaN(parseInt(insertedEndElement.value.replace(/\./g, "")))) {
+      insertedEndElement.value = "";
+    } else {
+      insertedEndElement.value = parseInt(
+        insertedEndElement.value.replace(/\./g, ""),
+      ).toLocaleString("vi-VN");
+    }
+  });
+
+  insertConfirmElement.addEventListener("click", (e) => {
+    e.preventDefault();
+    const lastRange =
+      options.taxRanges.length > 0
+        ? options.taxRanges[options.taxRanges.length - 1]
+        : null;
+
+    const start = lastRange?.end ?? 0;
+    const end = parseInt(insertedEndElement.value.replace(/\./g, ""));
+    const rate = parseFloat(insertedValueElement.value);
+    if (rate === 0 || end < start) {
+      return;
+    }
+    const insertedTaxRange = { start, end, rate };
+    options.taxRanges.push(insertedTaxRange);
+    insertRow.classList.add("hidden");
+    confirmRow.classList.add("hidden");
+    insertTaxRange(insertedTaxRange);
+    saveToLocalStorage();
+    insertedEndElement.value = "";
+    insertedValueElement.value = "";
+    beingInserted = false;
   });
 
   addNewButton.addEventListener("click", (e) => {
     if (beingInserted) {
       return;
     }
-    const taxRanges = options.taxRanges;
+
     const lastRange =
-      taxRanges.length > 0 ? taxRanges[taxRanges.length - 1] : null;
+      options.taxRanges.length > 0
+        ? options.taxRanges[options.taxRanges.length - 1]
+        : null;
     if (lastRange && lastRange.end === Number.POSITIVE_INFINITY) {
       return;
     }
-    const start = lastRange?.end ?? 0;
-    let end = 0;
-    let value = 0;
 
-    taxSettingsTableBody.insertAdjacentHTML(
-      "beforeend",
-      `
-        <tr class="tax-row" id="insertRow">
-          <td><input id="insertedEnd" type="text"></td>
-          <td><input  id="insertedValue" type="number"></td>
-        </tr>
-        <tr id="confirmRow">
-            <td colspan="2">
-                <button id="insertConfirm" class="btn-confirm">Xác nhận</button>
-            </td>
-        </tr>
-      `,
-    );
+    insertRow.classList.remove("hidden");
+    confirmRow.classList.remove("hidden");
 
     beingInserted = true;
-
-    const insertRow = document.getElementById("insertRow")!;
-    const confirmRow = document.getElementById("confirmRow")!;
-    const insertedEndElement = document.getElementById(
-      "insertedEnd",
-    ) as HTMLInputElement;
-    const insertedValueElement = document.getElementById(
-      "insertedValue",
-    ) as HTMLInputElement;
-    const insertConfirmElement = document.getElementById(
-      "insertConfirm",
-    ) as HTMLButtonElement;
-
-    insertedEndElement.addEventListener("input", () => {
-      if (isNaN(parseInt(insertedEndElement.value.replace(/\./g, "")))) {
-        insertedEndElement.value = "";
-      } else {
-        insertedEndElement.value = parseInt(
-          insertedEndElement.value.replace(/\./g, ""),
-        ).toLocaleString("vi-VN");
-        end = parseInt(insertedEndElement.value.replace(/\./g, ""));
-      }
-    });
-
-    insertedValueElement.addEventListener("input", () => {
-      value = parseFloat(insertedValueElement.value);
-    });
-
-    insertConfirmElement.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (value === 0 || end < start) {
-        return;
-      }
-      const insertedTaxRange = { start, end, rate: value };
-      taxRanges.push(insertedTaxRange);
-      insertRow.remove();
-      confirmRow.remove();
-      insertTaxRange(insertedTaxRange);
-      beingInserted = false;
-      saveToLocalStorage();
-    });
   });
 };
 
 const loadTaxRangesToUI = () => {
-  taxSettingsTableBody.innerHTML = "";
+  for (const child of Array.from(taxSettingsTableBody.children)) {
+    if (child.id !== "insertRow" && child.id !== "confirmRow") {
+      child.remove();
+    }
+  }
   for (const taxRange of options.taxRanges) {
     insertTaxRange(taxRange);
   }
 };
 
 const insertTaxRange = (taxRange: TaxRange) => {
-  taxSettingsTableBody.insertAdjacentHTML(
-    "beforeend",
+  insertRow.insertAdjacentHTML(
+    "beforebegin",
     `
       <tr id="row-${taxRange.toString()}" class="tax-row">
         <td><input disabled type="text" value="${taxRange.end.toLocaleString("vi-VN")}"></td>
@@ -241,7 +236,7 @@ const tryLoadFromLocalStorage = () => {
     !options.taxRanges[options.taxRanges.length - 1].end
   ) {
     options.taxRanges[options.taxRanges.length - 1].end =
-      Number.POSITIVE_INFINITY; 
+      Number.POSITIVE_INFINITY;
   }
 };
 

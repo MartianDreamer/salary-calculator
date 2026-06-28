@@ -135,26 +135,6 @@
         </tr>
       </table>
 
-      <!-- <h3>(*) Chi tiết thuế thu nhập cá nhân (VNĐ)</h3>
-    <table class="tax-table">
-      <thead>
-        <tr>
-          <th>Mức chịu thuế</th>
-          <th>Thuế suất</th>
-          <th>Lương chịu thuế</th>
-          <th>Tiền nộp</th>
-        </tr>
-      </thead>
-      <tbody id="tax-details-body">
-        <tr>
-          <td>Đến 5 triệu VNĐ</td>
-          <td>5%</td>
-          <td>5,000,000</td>
-          <td>250,000</td>
-        </tr>
-      </tbody>
-    </table> -->
-
       <h3>Người sử dụng lao động trả (VNĐ)</h3>
       <table class="details-table">
         <tr class="highlight-row">
@@ -244,6 +224,15 @@
               </tr>
             </thead>
             <tbody id="taxSettingsTableBody">
+              <tr class="tax-row hidden" id="insertRow">
+                <td><input id="insertedEnd" type="text"></td>
+                <td><input id="insertedValue" type="number"></td>
+              </tr>
+              <tr class="tax-row hidden" id="confirmRow">
+                <td colspan="2">
+                  <button id="insertConfirm" class="btn-confirm">Xác nhận</button>
+                </td>
+              </tr>
             </tbody>
           </table>
           <button type="button" id="addNewButton" class="btn-secondary">+ Thêm bậc thuế</button>

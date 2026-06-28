@@ -11,13 +11,17 @@ const formContainer = document.getElementById("formContainer")!;
 const resultContainer = document.getElementById("resultContainer")!;
 let currentMainScreen = FORM;
 
+export const resetHashAtStart = () => {
+  window.location.hash = `#${MAIN_TAB}#${FORM}`
+}
+
 export const handleTabClick = () => {
   tabMainElement.addEventListener("click", () => {
-    window.location.href = `#${MAIN_TAB}#${currentMainScreen}`;
+    window.location.hash = `#${MAIN_TAB}#${currentMainScreen}`;
   });
 
   tabOptionElement.addEventListener("click", () => {
-    window.location.href = `#${OPTION_TAB}`;
+    window.location.hash = `#${OPTION_TAB}`;
   });
 
   window.addEventListener("hashchange", () => {
@@ -32,17 +36,17 @@ export const handleTabClick = () => {
         handleSwitchToResult();
         break;
       default:
-        window.location.href = `#${MAIN_TAB}#${FORM}`;
+        window.location.hash = `#${MAIN_TAB}#${FORM}`;
     }
   });
 };
 
 export const switchToResult = () => {
-  window.location.href = `#${MAIN_TAB}#${RESULT}`;
+  window.location.hash = `#${MAIN_TAB}#${RESULT}`;
 };
 
 export const switchBackToForm = () => {
-  window.location.href = `#${MAIN_TAB}#${FORM}`;
+  window.location.hash = `#${MAIN_TAB}#${FORM}`;
 };
 
 const handleSwitchToResult = () => {
