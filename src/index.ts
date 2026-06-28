@@ -1,7 +1,7 @@
 import { handleFormSubmit, handleUiChange } from "./form";
 import { handleOptions } from "./options";
 import { handleBackButtonClick, renderSalaryCalculationResult } from "./result";
-import { handleTabClick } from "./tabs";
+import { handleTabClick } from "./navigation";
 
 const handleFormatInput = () => {
   document.querySelectorAll('input[type="text"]').forEach((input) => {

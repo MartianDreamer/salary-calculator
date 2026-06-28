@@ -1,4 +1,5 @@
 import { grossSalaryToNetSalary, netSalaryToGrossSalary } from "./calculation";
+import { switchToResult } from "./navigation";
 import { SalaryCalculationResult, SalaryData } from "./types";
 
 const salaryElement = document.getElementById("salary") as HTMLInputElement;
@@ -18,12 +19,6 @@ const dependentsElement = document.getElementById(
 const regionElement = document.getElementById("region") as HTMLSelectElement;
 const insuranceGroupElement = document.getElementById("insuranceGroup")!;
 const submitButton = document.getElementById("submitButton")!;
-const formContainer = document.getElementById(
-  "formContainer",
-) as HTMLDivElement;
-const resultContainer = document.getElementById(
-  "resultContainer",
-) as HTMLDivElement;
 
 const collectSalaryData = (): SalaryData => {
   const salary = parseInt(salaryElement.value.replace(/\./g, ""));
@@ -42,7 +37,7 @@ const collectSalaryData = (): SalaryData => {
 };
 
 export const handleFormSubmit = (
-  setCalculationResult: (result: SalaryCalculationResult) => void,
+  consumeCalculationResult: (result: SalaryCalculationResult) => void,
 ) => {
   submitButton.addEventListener("click", (e) => {
     e.preventDefault();
@@ -57,9 +52,8 @@ export const handleFormSubmit = (
     } else {
       result = netSalaryToGrossSalary(salaryData);
     }
-    formContainer.style.display = "none";
-    setCalculationResult(result);
-    resultContainer.style.display = "block";
+    consumeCalculationResult(result);
+    switchToResult();
   });
 };
 
