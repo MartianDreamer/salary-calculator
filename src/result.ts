@@ -1,12 +1,7 @@
 import { GIAM_TRU_GIA_CANH, GIAM_TRU_GIA_CANH_NGUOI_PHU_THUOC } from "./const";
+import { switchBackToForm } from "./navigation";
 import { SalaryCalculationResult } from "./types";
 
-const formContainer = document.getElementById(
-  "formContainer",
-) as HTMLDivElement;
-const resultContainer = document.getElementById(
-  "resultContainer",
-) as HTMLDivElement;
 const backButton = document.getElementById("backButton") as HTMLButtonElement;
 const resGrossElement = document.getElementById(
   "res-gross",
@@ -70,10 +65,7 @@ const employerTotalElement = document.getElementById(
 ) as HTMLTableCellElement;
 
 export const handleBackButtonClick = () => {
-  backButton.addEventListener("click", () => {
-    resultContainer.style.display = "none";
-    formContainer.style.display = "block";
-  });
+  backButton.addEventListener("click", switchBackToForm);
 };
 
 export const renderSalaryCalculationResult = (
@@ -98,15 +90,20 @@ export const renderSalaryCalculationResult = (
     result.unemploymentInsurance
   ).toLocaleString();
   detailGtBanthan.textContent = GIAM_TRU_GIA_CANH.toLocaleString();
-  detailGtNptElement.textContent = GIAM_TRU_GIA_CANH_NGUOI_PHU_THUOC.toLocaleString();
+  detailGtNptElement.textContent =
+    GIAM_TRU_GIA_CANH_NGUOI_PHU_THUOC.toLocaleString();
   detailTnctElement.textContent = result.taxableSalary.toLocaleString();
   detailTaxElement.textContent = result.personalIncomeTax.toLocaleString();
   detailNetElement.textContent = result.netSalary.toLocaleString();
   employerGrossElement.textContent = result.grossSalary.toLocaleString();
-  employerBhxhElement.textContent = result.employerSocialInsurance.toLocaleString();
-  employerBhtnldElement.textContent = result.employerAccidentInsurance.toLocaleString();
-  employerBhytElement.textContent = result.employerHealthInsurance.toLocaleString();
-  employerBhtnElement.textContent = result.employerUnemploymentInsurance.toLocaleString();
+  employerBhxhElement.textContent =
+    result.employerSocialInsurance.toLocaleString();
+  employerBhtnldElement.textContent =
+    result.employerAccidentInsurance.toLocaleString();
+  employerBhytElement.textContent =
+    result.employerHealthInsurance.toLocaleString();
+  employerBhtnElement.textContent =
+    result.employerUnemploymentInsurance.toLocaleString();
   employerTotalElement.textContent = (
     result.grossSalary +
     result.employerSocialInsurance +
