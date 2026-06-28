@@ -41,15 +41,15 @@ export const switchToResult = () => {
   window.location.href = `#${MAIN_TAB}#${RESULT}`;
 };
 
+export const switchBackToForm = () => {
+  window.location.href = `#${MAIN_TAB}#${FORM}`;
+};
+
 const handleSwitchToResult = () => {
   currentMainScreen = RESULT;
   openMainTab();
   formContainer.style.display = "none";
   resultContainer.style.display = "block";
-};
-
-export const switchBackToForm = () => {
-  window.location.href = `#${MAIN_TAB}#${FORM}`;
 };
 
 const handleSwitchBackToForm = () => {
@@ -71,8 +71,4 @@ const openMainTab = () => {
   tabOptionElement.classList.remove("active");
   mainTabElement.style.display = "block";
   optionTabElement.style.display = "none";
-};
-
-const navigateByUrl = () => {
-  window.addEventListener("hashchange", () => {});
 };
