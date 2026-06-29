@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "watch": "tsup src/index.ts --format iife --target es6 --watch --no-splitting --global-name App",
-    "build": "tsup src/index.ts --format iife --target es6 --no-splitting --global-name App --minify"
+    "watch": "tsup src/index.ts --format iife --target es6 --watch --no-splitting --global-name App --sourcemap",
+    "build": "rm -r dist && tsup src/index.ts --format iife --target es6 --no-splitting --global-name App --minify"
   },
   "devDependencies": {
     "@swc/core": "^1.15.43",
