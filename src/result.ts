@@ -1,4 +1,4 @@
-import { GIAM_TRU_GIA_CANH, GIAM_TRU_GIA_CANH_NGUOI_PHU_THUOC } from "./const";
+import { GIAM_TRU_GIA_CANH, GIAM_TRU_GIA_CANH_NGUOI_PHU_THUOC, DEFAULT_LOCALE } from "./const";
 import { switchBackToForm } from "./navigation";
 import { SalaryCalculationResult } from "./types";
 
@@ -71,44 +71,44 @@ export const handleBackButtonClick = () => {
 export const renderSalaryCalculationResult = (
   result: SalaryCalculationResult,
 ) => {
-  resGrossElement.textContent = result.grossSalary.toLocaleString();
+  resGrossElement.textContent = result.grossSalary.toLocaleString(DEFAULT_LOCALE);
   resInsuranceElement.textContent = `- ${(
     result.socialInsurance +
     result.healthInsurance +
     result.unemploymentInsurance
-  ).toLocaleString()}`;
-  resTaxElement.textContent = `- ${result.personalIncomeTax.toLocaleString()}`;
-  resNetElement.textContent = result.netSalary.toLocaleString();
-  detailGrossElement.textContent = result.grossSalary.toLocaleString();
-  detailBhxhElement.textContent = result.socialInsurance.toLocaleString();
-  detailBhytElement.textContent = result.healthInsurance.toLocaleString();
-  detailBhtnElement.textContent = result.unemploymentInsurance.toLocaleString();
+  ).toLocaleString(DEFAULT_LOCALE)}`;
+  resTaxElement.textContent = `- ${result.personalIncomeTax.toLocaleString(DEFAULT_LOCALE)}`;
+  resNetElement.textContent = result.netSalary.toLocaleString(DEFAULT_LOCALE);
+  detailGrossElement.textContent = result.grossSalary.toLocaleString(DEFAULT_LOCALE);
+  detailBhxhElement.textContent = result.socialInsurance.toLocaleString(DEFAULT_LOCALE);
+  detailBhytElement.textContent = result.healthInsurance.toLocaleString(DEFAULT_LOCALE);
+  detailBhtnElement.textContent = result.unemploymentInsurance.toLocaleString(DEFAULT_LOCALE);
   detailTnttElement.textContent = (
     result.grossSalary -
     result.socialInsurance -
     result.healthInsurance -
     result.unemploymentInsurance
-  ).toLocaleString();
-  detailGtBanthan.textContent = GIAM_TRU_GIA_CANH.toLocaleString();
+  ).toLocaleString(DEFAULT_LOCALE);
+  detailGtBanthan.textContent = GIAM_TRU_GIA_CANH.toLocaleString(DEFAULT_LOCALE);
   detailGtNptElement.textContent =
-    GIAM_TRU_GIA_CANH_NGUOI_PHU_THUOC.toLocaleString();
-  detailTnctElement.textContent = result.taxableSalary.toLocaleString();
-  detailTaxElement.textContent = result.personalIncomeTax.toLocaleString();
-  detailNetElement.textContent = result.netSalary.toLocaleString();
-  employerGrossElement.textContent = result.grossSalary.toLocaleString();
+    GIAM_TRU_GIA_CANH_NGUOI_PHU_THUOC.toLocaleString(DEFAULT_LOCALE);
+  detailTnctElement.textContent = result.taxableSalary.toLocaleString(DEFAULT_LOCALE);
+  detailTaxElement.textContent = result.personalIncomeTax.toLocaleString(DEFAULT_LOCALE);
+  detailNetElement.textContent = result.netSalary.toLocaleString(DEFAULT_LOCALE);
+  employerGrossElement.textContent = result.grossSalary.toLocaleString(DEFAULT_LOCALE);
   employerBhxhElement.textContent =
-    result.employerSocialInsurance.toLocaleString();
+    result.employerSocialInsurance.toLocaleString(DEFAULT_LOCALE);
   employerBhtnldElement.textContent =
-    result.employerAccidentInsurance.toLocaleString();
+    result.employerAccidentInsurance.toLocaleString(DEFAULT_LOCALE);
   employerBhytElement.textContent =
-    result.employerHealthInsurance.toLocaleString();
+    result.employerHealthInsurance.toLocaleString(DEFAULT_LOCALE);
   employerBhtnElement.textContent =
-    result.employerUnemploymentInsurance.toLocaleString();
+    result.employerUnemploymentInsurance.toLocaleString(DEFAULT_LOCALE);
   employerTotalElement.textContent = (
     result.grossSalary +
     result.employerSocialInsurance +
     result.employerAccidentInsurance +
     result.employerHealthInsurance +
     result.employerUnemploymentInsurance
-  ).toLocaleString();
+  ).toLocaleString(DEFAULT_LOCALE);
 };
