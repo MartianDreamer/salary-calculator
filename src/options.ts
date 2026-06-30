@@ -4,7 +4,7 @@ import {
   GIAM_TRU_GIA_CANH_NGUOI_PHU_THUOC,
   MINIMUM_SALARY,
   TAX_RANGES,
-  DEFAULT_LOCALE
+  DEFAULT_LOCALE,
 } from "./const";
 import { Option, TaxRange } from "./types";
 
@@ -64,15 +64,20 @@ const insertRow = document.getElementById("insertRow")!;
 const confirmRow = document.getElementById("confirmRow")!;
 
 const loadOptionsToUI = () => {
-  optBaseSalaryElement.value = options.baseSalary.toLocaleString(DEFAULT_LOCALE);
+  optBaseSalaryElement.value =
+    options.baseSalary.toLocaleString(DEFAULT_LOCALE);
   optPersonalDeductionElement.value =
     options.personalDeduction.toLocaleString(DEFAULT_LOCALE);
   optDependentDeductionElement.value =
     options.dependentDeduction.toLocaleString(DEFAULT_LOCALE);
-  optRegion1Element.value = options.minimumSalary[0].toLocaleString(DEFAULT_LOCALE);
-  optRegion2Element.value = options.minimumSalary[1].toLocaleString(DEFAULT_LOCALE);
-  optRegion3Element.value = options.minimumSalary[2].toLocaleString(DEFAULT_LOCALE);
-  optRegion4Element.value = options.minimumSalary[3].toLocaleString(DEFAULT_LOCALE);
+  optRegion1Element.value =
+    options.minimumSalary[0].toLocaleString(DEFAULT_LOCALE);
+  optRegion2Element.value =
+    options.minimumSalary[1].toLocaleString(DEFAULT_LOCALE);
+  optRegion3Element.value =
+    options.minimumSalary[2].toLocaleString(DEFAULT_LOCALE);
+  optRegion4Element.value =
+    options.minimumSalary[3].toLocaleString(DEFAULT_LOCALE);
   loadTaxRangesToUI();
 };
 
@@ -86,6 +91,7 @@ export const handleOptions = () => {
     e.preventDefault();
     loadDefaultValue();
     saveToLocalStorage();
+    resetAddingTaxRange();
     loadOptionsToUI();
   });
 
@@ -143,6 +149,7 @@ export const handleOptions = () => {
     options.taxRanges = [];
     loadTaxRangesToUI();
     saveToLocalStorage();
+    resetAddingTaxRange();
   });
 
   insertedEndElement.addEventListener("input", () => {
@@ -169,14 +176,10 @@ export const handleOptions = () => {
       return;
     }
     const insertedTaxRange = { start, end, rate };
+    resetAddingTaxRange();
     options.taxRanges.push(insertedTaxRange);
-    insertRow.classList.add("hidden");
-    confirmRow.classList.add("hidden");
     insertTaxRange(insertedTaxRange);
     saveToLocalStorage();
-    insertedEndElement.value = "";
-    insertedValueElement.value = "";
-    beingInserted = false;
   });
 
   addNewButton.addEventListener("click", (e) => {
@@ -197,6 +200,14 @@ export const handleOptions = () => {
 
     beingInserted = true;
   });
+
+  const resetAddingTaxRange = () => {
+    insertRow.classList.add("hidden");
+    confirmRow.classList.add("hidden");
+    insertedEndElement.value = "";
+    insertedValueElement.value = "";
+    beingInserted = false;
+  };
 };
 
 const loadTaxRangesToUI = () => {

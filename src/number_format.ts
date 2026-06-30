@@ -1,7 +1,7 @@
 import { DEFAULT_LOCALE } from "./const";
 
 export const handleFormatInput = () => {
-  document.querySelectorAll('input[type="text"]').forEach((input) => {
+  document.querySelectorAll('input[type="text"][data-number-formated]').forEach((input) => {
     const htmlInput = input as HTMLInputElement;
 
     const parsedValue = parseInt(htmlInput.value.replace(/\./g, ""));
