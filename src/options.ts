@@ -4,6 +4,7 @@ import {
   GIAM_TRU_GIA_CANH_NGUOI_PHU_THUOC,
   MINIMUM_SALARY,
   TAX_RANGES,
+  DEFAULT_LOCALE
 } from "./const";
 import { Option, TaxRange } from "./types";
 
@@ -63,15 +64,15 @@ const insertRow = document.getElementById("insertRow")!;
 const confirmRow = document.getElementById("confirmRow")!;
 
 const loadOptionsToUI = () => {
-  optBaseSalaryElement.value = options.baseSalary.toLocaleString("vi-VN");
+  optBaseSalaryElement.value = options.baseSalary.toLocaleString(DEFAULT_LOCALE);
   optPersonalDeductionElement.value =
-    options.personalDeduction.toLocaleString("vi-VN");
+    options.personalDeduction.toLocaleString(DEFAULT_LOCALE);
   optDependentDeductionElement.value =
-    options.dependentDeduction.toLocaleString("vi-VN");
-  optRegion1Element.value = options.minimumSalary[0].toLocaleString("vi-VN");
-  optRegion2Element.value = options.minimumSalary[1].toLocaleString("vi-VN");
-  optRegion3Element.value = options.minimumSalary[2].toLocaleString("vi-VN");
-  optRegion4Element.value = options.minimumSalary[3].toLocaleString("vi-VN");
+    options.dependentDeduction.toLocaleString(DEFAULT_LOCALE);
+  optRegion1Element.value = options.minimumSalary[0].toLocaleString(DEFAULT_LOCALE);
+  optRegion2Element.value = options.minimumSalary[1].toLocaleString(DEFAULT_LOCALE);
+  optRegion3Element.value = options.minimumSalary[2].toLocaleString(DEFAULT_LOCALE);
+  optRegion4Element.value = options.minimumSalary[3].toLocaleString(DEFAULT_LOCALE);
   loadTaxRangesToUI();
 };
 
@@ -150,7 +151,7 @@ export const handleOptions = () => {
     } else {
       insertedEndElement.value = parseInt(
         insertedEndElement.value.replace(/\./g, ""),
-      ).toLocaleString("vi-VN");
+      ).toLocaleString(DEFAULT_LOCALE);
     }
   });
 
@@ -214,7 +215,7 @@ const insertTaxRange = (taxRange: TaxRange) => {
     "beforebegin",
     `
       <tr id="row-${taxRange.toString()}" class="tax-row">
-        <td><input disabled type="text" value="${taxRange.end.toLocaleString("vi-VN")}"></td>
+        <td><input disabled type="text" value="${taxRange.end.toLocaleString(DEFAULT_LOCALE)}"></td>
         <td><input disabled type="number" value="${taxRange.rate}"></td>
       </tr>`,
   );

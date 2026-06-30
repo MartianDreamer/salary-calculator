@@ -21,3 +21,4 @@ export const MINIMUM_SALARY = [
   MINIMUM_SALARY_III,
   MINIMUM_SALARY_IV,
 ];
+export const DEFAULT_LOCALE = "vi-VN";
