@@ -81,9 +81,9 @@ export const netSalaryToGrossSalary = (
   const targetNet = salaryData.salary;
 
   let low = targetNet;
-  let high = Math.max(targetNet * 2, 2_000_000_000);
-  let tolerance = 0.01;
-  let maxIterations = 400;
+  let high = targetNet * 2;
+  let tolerance = 0.1;
+  let maxIterations = 200;
 
   let bestResult: SalaryCalculationResult | null = null;
 
