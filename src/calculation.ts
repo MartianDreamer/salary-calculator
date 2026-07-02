@@ -1,3 +1,4 @@
+import { BASE_SALARY_WEIGHT, EMPLOYER_ACCIDENT_INSURANCE_RATE, EMPLOYER_HEALTH_INSURANCE_RATE, EMPLOYER_SOCIAL_INSURANCE_RATE, EMPLOYER_UNEMPLOYMENT_INSURANCE_RATE, HEALTH_INSURANCE_RATE, MINIMUM_SALARY_WEIGHT, SOCIAL_INSURANCE_RATE, UNEMPLOYMENT_INSURANCE_RATE } from "./const";
 import { options } from "./options";
 import { SalaryCalculationResult, SalaryData } from "./types";
 
@@ -19,20 +20,20 @@ export const grossSalaryToNetSalary = (
   } = salaryData;
   const insuranceSalaryCapped = Math.min(
     fullInsurance ? grossSalary : insuranceSalary,
-    baseSalary * 20,
+    baseSalary * BASE_SALARY_WEIGHT,
   );
   const unemploymentInsuranceSalaryCapped = Math.min(
     fullInsurance ? grossSalary : insuranceSalary,
-    minimumSalary[salaryData.region] * 20,
+    minimumSalary[salaryData.region] * MINIMUM_SALARY_WEIGHT,
   );
-  const socialInsurance = insuranceSalaryCapped * 0.08;
-  const healthInsurance = insuranceSalaryCapped * 0.015;
-  const unemploymentInsurance = unemploymentInsuranceSalaryCapped * 0.01;
-  const employerSocialInsurance = insuranceSalaryCapped * 0.17;
-  const employerAccidentInsurance = insuranceSalaryCapped * 0.005;
-  const employerHealthInsurance = insuranceSalaryCapped * 0.03;
+  const socialInsurance = insuranceSalaryCapped * SOCIAL_INSURANCE_RATE;
+  const healthInsurance = insuranceSalaryCapped * HEALTH_INSURANCE_RATE;
+  const unemploymentInsurance = unemploymentInsuranceSalaryCapped * UNEMPLOYMENT_INSURANCE_RATE;
+  const employerSocialInsurance = insuranceSalaryCapped * EMPLOYER_SOCIAL_INSURANCE_RATE;
+  const employerAccidentInsurance = insuranceSalaryCapped * EMPLOYER_ACCIDENT_INSURANCE_RATE;
+  const employerHealthInsurance = insuranceSalaryCapped * EMPLOYER_HEALTH_INSURANCE_RATE;
   const employerUnemploymentInsurance =
-    unemploymentInsuranceSalaryCapped * 0.01;
+    unemploymentInsuranceSalaryCapped * EMPLOYER_UNEMPLOYMENT_INSURANCE_RATE;
   const taxableSalary = Math.max(
     grossSalary -
       socialInsurance -
@@ -82,12 +83,12 @@ export const netSalaryToGrossSalary = (
 
   let low = targetNet;
   let high = targetNet * 2;
-  let tolerance = 0.1;
-  let maxIterations = 200;
+  const TOLERANCE = 0.1;
+  const MAX_ITERATIONS = 200;
 
   let bestResult: SalaryCalculationResult | null = null;
 
-  for (let i = 0; i < maxIterations; i++) {
+  for (let i = 0; i < MAX_ITERATIONS; i++) {
     const midGross = (low + high) / 2;
 
     const testData: SalaryData = {
@@ -101,7 +102,7 @@ export const netSalaryToGrossSalary = (
 
     const diff = currentResult.netSalary - targetNet;
 
-    if (Math.abs(diff) < tolerance) {
+    if (Math.abs(diff) < TOLERANCE) {
       break;
     }
 
