@@ -1,11 +1,13 @@
 {
-  "scripts": {
-    "watch": "tsup src/index.ts --format iife --target es6 --watch --no-splitting --global-name App --sourcemap",
-    "build": "rm -r dist && tsup src/index.ts --format iife --target es6 --no-splitting --global-name App --minify"
-  },
-  "devDependencies": {
-    "@swc/core": "^1.15.43",
-    "tsup": "^8.5.1",
-    "typescript": "^6.0.3"
-  }
+    "scripts": {
+        "watch": "tsup src/index.ts --format iife --target es6 --watch --no-splitting --global-name App --sourcemap",
+        "build": "rm -r dist && tsup src/index.ts --format iife --target es6 --no-splitting --global-name App --minify",
+        "format": "prettier --write \"src/**/*.ts\" && prettier --write \"*.{html,css}\""
+    },
+    "devDependencies": {
+        "@swc/core": "^1.15.43",
+        "prettier": "^3.9.4",
+        "tsup": "^8.5.1",
+        "typescript": "^6.0.3"
+    }
 }
